@@ -1,0 +1,38 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Update Counts
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+    - shell: bash
+      env:
+        CHAABI: ${{ secrets.CHAABI }}
+        NAAM: ${{ secrets.NAAM }}
+      run: |
+        npm i
+        node index.js "$CHAABI" "$NAAM"
+    - name: Commit report
+      run: |
+        git config --global user.name 'amygdala-oblongata'
+        git config --global user.email 'amygdala.oblongata@gmail.com'
+        git add counts.txt
+        git commit -m "Automated update"
+        git push
+
