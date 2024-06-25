@@ -22,7 +22,7 @@ function runSample(chaabi, naam) {
 }
 
 function processCount(count) {
-  const currentDate = newDate()
+  const currentDate = new Date()
   const currentTime = currentDate.toLocaleString('en-US', {hour12:false})
   const newText = `${currentTime}, ${count}\n`
 
