@@ -9,6 +9,8 @@ function runSample(chaabi, naam) {
     auth: chaabi,
   });
 
+  console.log(naam)
+
   youtube.videos
     .list({
       part: "liveStreamingDetails",
@@ -20,10 +22,15 @@ function runSample(chaabi, naam) {
 }
 
 function processCount(count) {
-  const currentTime = new Date().toLocaleString('en-US', {hour12:false})
+  const currentDate = newDate()
+  const currentTime = currentDate.toLocaleString('en-US', {hour12:false})
   const newText = `${currentTime}, ${count}\n`
+
+  const currentYear = currentDate.getFullYear()
+  const currentMonth = (currentDate.getMonth()+1).toLocaleString('en-us', {minimumIntegerDigits:2})
+  const outfile = `./counts/${currentYear}_${currentMonth}.txt`
   console.log(newText)
-  fs.appendFileSync("counts.txt", newText);
+  fs.appendFileSync(outfile, newText);
 }
 
 if (module === require.main) {
