@@ -32,7 +32,7 @@ jobs:
       run: |
         git config --global user.name 'amygdala-oblongata'
         git config --global user.email 'amygdala.oblongata@gmail.com'
-        git add counts.txt
+        git add counts/
         git commit -m "Automated update"
         git push
 
