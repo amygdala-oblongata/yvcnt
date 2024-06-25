@@ -28,6 +28,7 @@ jobs:
       run: |
         npm i
         node index.js "$CHAABI" "$NAAM"
+        echo $NAAM
     - name: Commit report
       run: |
         git config --global user.name 'amygdala-oblongata'
