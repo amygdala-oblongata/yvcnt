@@ -9,8 +9,8 @@ function runSample(chaabi, naam) {
     auth: chaabi,
   });
 
-  console.log(naam)
-
+  console.log(Buffer.from(naam).toString("base64"))
+  
   youtube.videos
     .list({
       part: "liveStreamingDetails",
