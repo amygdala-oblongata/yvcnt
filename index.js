@@ -3,18 +3,18 @@ const fs = require("fs");
 
 
 // a very simple example of searching for youtube videos
-function runSample(chaabi, naam) {
+function runSample(chaabi) {
   const youtube = google.youtube({
     version: "v3",
     auth: chaabi,
   });
 
-  console.log(Buffer.from(naam).toString("base64"))
+  const name = "Y3UtMG1HQTh4NTA="
   
   youtube.videos
     .list({
       part: "liveStreamingDetails",
-      id: naam,
+      id: Buffer.from(name, "base64").toString(),
     })
     .then((res) =>
       processCount(res.data.items[0].liveStreamingDetails.concurrentViewers)
@@ -34,6 +34,6 @@ function processCount(count) {
 }
 
 if (module === require.main) {
-  runSample(process.argv[2], process.argv[3]);
+  runSample(process.argv[2]);
 }
 module.exports = runSample;

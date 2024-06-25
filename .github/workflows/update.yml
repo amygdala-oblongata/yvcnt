@@ -24,10 +24,9 @@ jobs:
     - shell: bash
       env:
         CHAABI: ${{ secrets.CHAABI }}
-        NAAM: ${{ secrets.NAAM }}
       run: |
         npm i
-        node index.js "$CHAABI" "$NAAM"
+        node index.js "$CHAABI"
     - name: Commit report
       run: |
         git config --global user.name 'amygdala-oblongata'
